@@ -11,15 +11,18 @@ export class NotesService {
     private readonly notesRepository: Repository<Note>,
   ) {}
 
+  // Create a new note
   async create(title: string, content: string, user: User): Promise<Note> {
     const note = this.notesRepository.create({ title, content, user });
     return await this.notesRepository.save(note);
   }
 
+  // Get all notes for a user
   async findAll(user: User): Promise<Note[]> {
     return await this.notesRepository.find({ where: { user }, order: { id: 'DESC' } });
   }
 
+  // Delete a note by ID for a user
   async delete(id: number, user: User): Promise<{ affected: number }> {
     const existing = await this.notesRepository.findOne({ where: { id, user } });
     if (!existing) {

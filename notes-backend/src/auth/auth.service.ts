@@ -9,12 +9,13 @@ import { LoginDto } from './dto/login.dto';
 export class AuthService {
   constructor(private usersService: UsersService, private jwt: JwtService) {}
 
+  // Register a new user
   async register(dto: CreateUserDto) {
     const hashed = await bcrypt.hash(dto.password, 10);
     const user = await this.usersService.create({ ...dto, password: hashed });
     return { id: user.id, email: user.email, username: user.username };
   }
-
+  // Authenticate user and return JWT
   async login(dto: LoginDto) {
     const user = await this.usersService.findByEmail(dto.email);
     if (!user) throw new UnauthorizedException('Invalid credentials');

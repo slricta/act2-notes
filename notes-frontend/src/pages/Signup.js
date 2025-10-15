@@ -11,12 +11,14 @@ function Signup() {
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
+        // Handle Signup
         e.preventDefault();
         if (password !== confirmPassword) {
             alert("Passwords do not match");
             return;
         }
         try{
+            // API call to register
             await axios.post("http://localhost:3000/auth/register", { username, email, password });
             alert("Signup successful! Please login.");
             navigate("/");

@@ -47,12 +47,14 @@ function Home() {
     fetchNotes();
   }, [navigate]);
 
+  // Fetch Notes
   const fetchNotes = () => {
     api.get("/notes")
       .then((res) => setNotes(res.data))
       .catch((err) => console.error(err));
   };
 
+  // Create or Update Note
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editingId) {
@@ -73,18 +75,21 @@ function Home() {
     }
   };
 
+  // Edit Note
   const handleEdit = (note) => {
     setTitle(note.title);
     setContent(note.content);
     setEditingId(note.id);
   };
 
+  // Delete Note
   const handleDelete = (id) => {
     if (window.confirm("Delete this note?")) {
       api.delete(`/notes/${id}`).then(() => fetchNotes());
     }
   };
 
+  // Modal Handlers
   const openModal = (note) => {
     setSelectedNote(note);
     setIsModalOpen(true);
@@ -95,6 +100,7 @@ function Home() {
     setSelectedNote(null);
   };
 
+  // Handle Edit and Delete from Modal
   const handleEditFromModal = () => {
     if (!selectedNote) return;
     setTitle(selectedNote.title);
@@ -178,6 +184,7 @@ function Home() {
         )}
       </div>
 
+      {/* Note Modal */}
       {isModalOpen && selectedNote && (
         <div className="modalOverlay" onClick={closeModal}>
           <div className="modalContent" onClick={(e) => e.stopPropagation()}>

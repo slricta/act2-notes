@@ -8,16 +8,19 @@ import { AuthGuard } from '@nestjs/passport';
 export class AuthController {
   constructor(private auth: AuthService) {}
 
+  // Register a new user
   @Post('register')
   register(@Body() dto: CreateUserDto) {
     return this.auth.register(dto);
   }
 
+  // Authenticate user and return JWT
   @Post('login')
   login(@Body() dto: LoginDto) {
     return this.auth.login(dto);
   }
 
+  // Get current authenticated user
   @UseGuards(AuthGuard('jwt'))
   @Get('me')
   getMe(@Req() req: any) {
