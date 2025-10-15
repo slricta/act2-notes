@@ -33,6 +33,13 @@ cd ../notes-frontend
 npm install
 ```
 
+## Environment setup
+This project requires a .env file in order to run.
+Copy the example env file
+```
+cp .env.example .env
+```
+
 ## Database Setup
 
 This project uses **MySQL** as the database.  
