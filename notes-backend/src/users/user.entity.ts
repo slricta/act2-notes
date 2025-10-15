@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Note } from '../notes/note.entity';
 
 @Entity()
+// generates a table named 'user' in the database
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
