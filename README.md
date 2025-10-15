@@ -14,6 +14,14 @@ This project demonstrates basic **CRUD operations** (Create, Read, Update, Delet
 - **Styling:** CSS
 - **Backend:** Nest.js, MySQL, XAMPP
 
+## Prerequisites
+- **Node.js**
+- **Nest.js**
+- **React**
+- **MySQL Server** (or XAMPP)
+- **Git** (for cloning the repository)
+- **Postman** (optional, for testing APIs)
+
 ## Installation
 
 Clone the repository:
