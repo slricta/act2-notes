@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Delete, Body, UseGuards, Req, Param } from '@nestjs/common';
+import { Controller, Post, Get, Delete, Put, Body, UseGuards, Req, Param } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -25,5 +25,15 @@ export class NotesController {
   @Delete(':id')
   delete(@Param('id') id: number, @Req() req: any) {
     return this.notes.delete(id, req.user);
+  }
+
+  // Update a note by ID
+  @Put(':id')
+  update(
+    @Param('id') id: number,
+    @Body() body: { title: string; content: string },
+    @Req() req: any,
+  ) {
+    return this.notes.update(id, body.title, body.content, req.user);
   }
 }

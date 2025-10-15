@@ -31,4 +31,15 @@ export class NotesService {
     const res = await this.notesRepository.delete(id);
     return { affected: (res.affected ?? 0) };
   }
+
+  // Update a note by ID for a user
+  async update(id: number, title: string, content: string, user: User): Promise<Note | null> {
+    const existing = await this.notesRepository.findOne({ where: { id, user } });
+    if (!existing) {
+      return null;
+    }
+    existing.title = title;
+    existing.content = content;
+    return await this.notesRepository.save(existing);
+  }
 }
